@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Calculator</title>
+
+    <!-- PWA must-haves -->
+    <link rel="manifest" href="{% static 'calcapp/manifest.json' %}/manifest.json">
+    <meta name="theme-color" content="#ff9500">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Icons -->
+    <link rel="icon" href="{% static 'calcapp/icons/icon5.png' %}" sizes="512x512">
+    <link rel="apple-touch-icon" href="{% static 'calcapp/icons/icon5.png' %}">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'calcapp/style.css' %}">
+</head>
+<body>
+    <div class="calc">
+        <input type="text" id="display" readonly>
+        <div class="buttons">
+            <button class="ac" onclick="clearDisplay()">AC</button>
+            <button onclick="appendOperator('^')">x²</button>
+            <button onclick="appendOperator('%')">%</button>
+            <button class="op" onclick="appendOperator('/')">÷</button>
+
+            <button class="num" onclick="appendNumber('7')">7</button>
+            <button class="num" onclick="appendNumber('8')">8</button>
+            <button class="num" onclick="appendNumber('9')">9</button>
+            <button class="op" onclick="appendOperator('*')">×</button>
+
+            <button class="num" onclick="appendNumber('4')">4</button>
+            <button class="num" onclick="appendNumber('5')">5</button>
+            <button class="num" onclick="appendNumber('6')">6</button>
+            <button class="op" onclick="appendOperator('-')">−</button>
+
+            <button class="num" onclick="appendNumber('1')">1</button>
+            <button class="num" onclick="appendNumber('2')">2</button>
+            <button class="num" onclick="appendNumber('3')">3</button>
+            <button class="op" onclick="appendOperator('+')">+</button>
+
+            <button class="num zero" onclick="appendNumber('0')">0</button>
+            <button class="num" onclick="appendNumber('.')">.</button>
+            <button class="eq" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script src="{% static 'calcapp/script.js' %}"></script>
+
+    <!-- Service Worker + Install Button -->
+    <script>
+        // Register SW
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/static/calcapp/service-worker.js');
+        }
+
+        // Install button (appears automatically on phone/desktop)
+        let installPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            installPrompt = e;
+
+            const btn = document.createElement('button');
+            btn.textContent = 'Install App';
+            btn.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:14px 32px;background:#ff9500;color:#fff;border:none;border-radius:50px;font-size:18px;font-weight:bold;box-shadow:0 10px 30px #0008;z-index:9999;cursor:pointer;';
+            btn.onclick = () => {
+                btn.style.display = 'none';
+                installPrompt.prompt();
+            };
+            document.body.appendChild(btn);
+        });
+    </script>
+</body>
+</html>

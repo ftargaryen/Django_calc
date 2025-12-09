@@ -1,0 +1,39 @@
+{
+  "name": "Dark Calculator",
+  "short_name": "Calc",
+  "description": "Beautiful dark calculator with offline support",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff9500",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/static/calcapp/icons/icon5.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/calcapp/icons/icon4.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/calcapp/icons/icon3.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/calcapp/icons/icon2.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/calcapp/icons/icon1.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ]
+}
